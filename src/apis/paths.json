@@ -1,0 +1,6 @@
+{
+  "/user/subuser/list": "GET|String|Blob|1",
+  "/service-user/user/getUserInfo": "GET|String|JSON|1",
+  "/service-user/user/getUserList": "GET|String|JSON|1",
+  "/service-user/user/getUserListByPage": "GET|String|JSON|1"
+}

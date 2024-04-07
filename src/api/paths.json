@@ -1,0 +1,4 @@
+{
+  "/profile/detail/{id}/edit": "POST|FormData|String|1",
+  "/user/subuser/list": "GET|String|Blob|1"
+}

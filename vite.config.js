@@ -7,7 +7,7 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 /*自定义主题*/
 import path from 'path'
-console.log(path.resolve(__dirname, 'src'));
+import autoCreateApi from 'auto-create-api/rollup'
 export default defineConfig({
   resolve: {
     alias: {
@@ -24,6 +24,7 @@ export default defineConfig({
   },
   plugins: [
     vue(),
+    autoCreateApi(),
     AutoImport({
       resolvers: [ElementPlusResolver()],
     }),
