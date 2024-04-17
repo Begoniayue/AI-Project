@@ -1,9 +1,21 @@
+const container = () => import("@/components/Container/Container.vue")
 const routes = [
   {
     path: '/',
-    name: 'home',
-    /* 重定向 */
-    component: () => import("@/views/Home/index.vue"),
+    name: 'Square',
+    component:container,
+    children: [
+      {
+        path: '/',
+        name: 'Square',
+        component: () => import("@/views/Home/Square.vue"),
+      },
+        {
+          path: '/plug',
+          name: 'plug',
+          component: () => import("@/views/Plug/Plug.vue"),
+        },
+      ]
   },
   /* 所有找不到的路由都会跳转到404页面 */
   // {
