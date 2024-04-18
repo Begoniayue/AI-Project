@@ -26,7 +26,7 @@ const defaultParam = {
   data: {},
   requestBodyType: 'String',
   responseBodyType: 'JSON',
-  needToken: true,
+  needToken: false,
   redirectAfterFailAuth: true
 }
 // @ts-ignore
@@ -60,7 +60,6 @@ export const request = async (param) => {
   const init = {
     method: paramAfterAssign['method'],
     headers,
-    body: paramAfterAssign['data']
   }
 
   let url = import.meta.env.VITE_BASE_URL + paramAfterAssign['url']

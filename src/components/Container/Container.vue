@@ -35,13 +35,13 @@
               active-text-color="#fff"
               background-color="#000"
               class="menu-side"
-              default-active="2"
+              default-active="/"
               text-color="#fff"
               @select="handleSelect"
               router
           >
             <div class="nave-title">为你推荐</div>
-            <el-menu-item index="/" class="menu-item" path="ins_zone">
+            <el-menu-item index="/" class="menu-item">
               <svg-icon iconName="icon-lingganzhongxin"></svg-icon>
               <span>灵感中心</span>
             </el-menu-item>
@@ -60,7 +60,7 @@
             </el-menu-item>
           </el-menu>
         </el-aside>
-        <el-main>
+        <el-main class="container-router">
           <router-view></router-view>
         </el-main>
       </el-container>
@@ -71,7 +71,7 @@
 <script setup>
 import { ref } from 'vue'
 
-const activeIndex = ref('1')
+const activeIndex = ref('/')
 const handleSelect = (key, keyPath) => {
   console.log(key, keyPath)
 }
@@ -114,4 +114,10 @@ const handleSelect = (key, keyPath) => {
 .user-avatar{
   color: #f9f9f9;
 }
+.container-router{
+  padding-top: 0px;
+  margin-top: -20px;
+  padding-left: 40px;
+}
+
 </style>
