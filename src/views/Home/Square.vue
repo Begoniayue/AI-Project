@@ -1,30 +1,50 @@
 <template>
-  <el-tabs v-model="activeName" class="square-tab" @tab-click="handleClick">
-    <el-tab-pane label="灵感区" name="first">灵感区</el-tab-pane>
-    <el-tab-pane label="风格广场" name="second">风格广场</el-tab-pane>
-    <el-tab-pane label="风格训练" name="third">风格训练</el-tab-pane>
-  </el-tabs>
+  <Header />
+  <div class="square">
+    <div v-masonry="containerId" transition-duration="0.3s" item-selector=".item">
+      <div v-masonry-tile class="item" v-for="(item, index) in data">
+        <img :src="`https://aiimg.justeasy.cn/${item.out_url}`" alt="mock images" :width="item.width" :height="item.height">
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import Header from "@/components/Square/Header.vue";
+import { ref ,onMounted} from "vue";
+import {GetInspirationListApi} from "@/apis/common/common.api.js";
+const data = ref([]);
 
-const activeName = ref('first')
-
-const handleClick = (tab, event) => {
-  console.log(tab, event)
+const getList = () => {
+  GetInspirationListApi({page:1}).then(res => {
+    console.log(res,'res')
+    if (res.status === 200) {
+      //data.value = res.list
+      // data.value = res.list;
+      data.value = getImgProportion(res.list);
+      console.log(res,data.value)
+    }
+  })
+};
+/**/
+const itemBox = ref(0);
+function getWaterfallNum(){
+  let box = document.querySelector('.square');
+  itemBox.value = Math.floor(box.offsetWidth / 5) - 15;
 }
+function getImgProportion(data){
+  if (data.length !== 0) {
+    for (let i = 0; i < data.length; i++) {
+      data[i].height =  Math.floor(( Number(data[i].picheight) / Number(data[i].picwidth)) * itemBox.value)
+      data[i].width = itemBox.value;
+    }
+  }
+  return data
+}
+onMounted( () => {
+  getWaterfallNum()
+  getList()
+})
 </script>
-
-<style scoped>
-.square-tab  .el-tabs__content{
-  font-size: 18px;
-  color: #C4C5C5;
-}
-.demo-tabs > .el-tabs__content {
-  padding: 32px;
-  color: #6b778c;
-  font-size: 32px;
-  font-weight: 600;
-}
+<style>
 </style>
